@@ -1,0 +1,9 @@
+.notFound {
+    font-size: 5rem;
+    font-weight: bold;
+    text-align: center;
+    padding: auto auto;
+    padding-top: 5rem;
+    user-select: none;
+    color: gray;
+}
