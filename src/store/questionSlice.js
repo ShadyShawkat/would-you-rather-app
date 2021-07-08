@@ -1,15 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { _getQuestions } from "../_DATA";
 
 const initialState = {
-    questions = {}
+  questions: {},
 };
 
 const questionSlice = createSlice({
   name: "question",
   initialState,
   reducers: {
+    getQuestion(state, action) {
+      state.questions = action.payload;
+    },
   },
 });
+
+export const fetchQuestions = () => {
+  return async (dispatch) => {
+    _getQuestions().then((data) =>
+      dispatch(questionSlice.actions.getQuestion(data))
+    );
+  };
+};
 
 export const questionActions = questionSlice.actions;
 export default questionSlice.reducer;

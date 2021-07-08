@@ -1,0 +1,130 @@
+.card {
+  border: 1px solid rgb(148, 148, 148);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  width: 40%;
+  margin: 1.5rem auto;
+
+}
+
+.cardHeader {
+  border-bottom: 1px solid rgb(148, 148, 148);
+  padding: 0.5rem;
+  font-weight: bold;
+  background-color: rgb(235, 235, 235);
+}
+
+.cardBody {
+  display: flex;
+  padding: 0.75rem;
+}
+
+.avatarImg {
+  width: 40%;
+  margin: auto 0.5rem auto 0;
+  border-right: 1px solid rgb(148, 148, 148);
+  padding-right: 0.5rem;;
+}
+
+.avatarImg img {
+  width: 100%;
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex: 1;
+  /* padding: 0.5rem; */
+}
+
+.cardText h4 {
+  margin: 0;
+  padding: 0;
+}
+
+.cardText > div {
+  border: 1px solid rgb(148, 148, 148);
+  border-radius: 0.75rem;
+  background-color: rgb(230, 230, 230);
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  position: relative;
+}
+
+.optionOne {
+  margin: 1rem 0;
+}
+
+.progressBar {
+  height: 2rem;
+  width: 100%;
+  background-color: rgb(185, 185, 185);
+  border-radius: 0.5rem;
+  z-index: 1;
+  overflow: hidden;
+  margin: 1rem 0 0 0 ;
+  /* margin: 0.5rem */
+}
+
+.progressBar div {
+  height: 100%;
+  background-color: green;
+  z-index: 2;
+}
+
+.voteRatioText {
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.voted::after {
+  content: 'You Voted';
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  bottom : -0.75rem;
+  right: -0.75rem;
+  width: 3.5rem;
+  height: 3rem;
+  text-align: center;
+  padding-top: 0.5rem;
+  border: 1px solid rgb(148, 148, 148);
+  border-radius: 50%;
+  background-color: red;
+}
+
+.voted {
+  background-color: rgb(255, 216, 216) !important;
+}
+
+.loadingRing {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  margin: 3rem 0;
+}
+
+.loadingRing:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 10px solid #fff;
+  border-color: rgb(218, 5, 147) transparent rgb(218, 5, 147) transparent;
+  animation: loadingRing 1.2s linear infinite;
+}
+
+@keyframes loadingRing {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

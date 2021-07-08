@@ -18,6 +18,12 @@ const Login = (props) => {
     setSelectedOption(event.target.value);
   };
 
+  useEffect(() => {
+    if (users) {
+      setIsSelectOptionLoaded(true);
+    }
+  }, [])
+
   const loginHandler = () => {
     dispatch(authActions.login(Object.values(users).find(user => user.id === selectedOption)))
     history.push('/home')

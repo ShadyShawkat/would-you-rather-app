@@ -20,13 +20,13 @@ const Nav = (props) => {
     <nav className={classes.nav}>
       {currentUser && (
         <ul>
-          <li className={activeTab == 'home' && classes.activeTab}>
+          <li className={activeTab === 'home' && classes.activeTab}>
             <Link to="/home" onClick={() => setActiveTab('home')}>Home</Link>
           </li>
-          <li className={activeTab == 'newQuestion' && classes.activeTab}>
+          <li className={activeTab === 'newQuestion' && classes.activeTab}>
             <Link to="/" onClick={() => setActiveTab('newQuestion')}>New Question</Link>
           </li>
-          <li className={activeTab == 'leaderboard' && classes.activeTab}>
+          <li className={activeTab === 'leaderboard' && classes.activeTab}>
             <Link to="/" onClick={() => setActiveTab('leaderboard')}>Leaderboard</Link>
           </li>
           <li>

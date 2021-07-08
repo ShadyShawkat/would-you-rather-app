@@ -1,0 +1,95 @@
+.card {
+    border: 1px solid rgb(148, 148, 148);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    width: 40%;
+    margin: 1.5rem auto;
+  
+  }
+  
+  .cardHeader {
+    border-bottom: 1px solid rgb(148, 148, 148);
+    padding: 0.5rem;
+    font-weight: bold;
+    background-color: rgb(235, 235, 235);
+  }
+  
+  .cardBody {
+    display: flex;
+    padding: 0.75rem;
+  }
+  
+  .avatarImg {
+    width: 40%;
+    margin: auto 0.5rem auto 0;
+    border-right: 1px solid rgb(148, 148, 148);
+    padding-right: 0.5rem;;
+  }
+  
+  .avatarImg img {
+    width: 100%;
+  }
+  
+  .cardText {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 0.5rem 0;
+  }
+  
+  .cardText h4 {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .cardText form {
+    display: flex;
+    flex-direction: column;
+    flex:1;
+    justify-content: space-evenly;
+  }
+  
+  .cardText form > div {
+      margin-top: 1.5rem
+  }
+
+  .cardText button {
+      background-color: rgb(218, 5, 147);
+      color: white;
+      font-weight: bold;
+      font-size: 1.5rem;
+      border: 1px solid rgb(148, 148, 148);
+      border-radius: 0.65rem;
+      cursor: pointer;
+      margin-top: auto;
+  }
+
+  .loadingRing {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    margin: 3rem 0;
+  }
+  
+  .loadingRing:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 10px solid #fff;
+    border-color: rgb(218, 5, 147) transparent rgb(218, 5, 147) transparent;
+    animation: loadingRing 1.2s linear infinite;
+  }
+  
+  @keyframes loadingRing {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

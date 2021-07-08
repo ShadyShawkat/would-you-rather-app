@@ -6,7 +6,11 @@ import Nav from "./components/Navigation/Nav";
 import Login from "./components/Login/Login";
 import NotFound from "./components/NotFound/NotFound";
 import Home from "./components/Home/Home";
+import Question from './components/Question/Question'
+import QuestionDetails from "./components/QuestionDetails/QuestionDetails"
+import QuestionForm from './components/QuestionForm/QuestionForm'
 import { fetchUsers } from "./store/usersSlice";
+import { fetchQuestions } from "./store/questionSlice";
 import { authActions } from "./store/authSlice"
 
 function App() {
@@ -21,6 +25,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchUsers());
+    dispatch(fetchQuestions());
   }, []);
 
   return (
@@ -30,6 +35,12 @@ function App() {
         <Switch>
           <Route path={["/", "/home"]} exact>
             <Home />
+          </Route>
+          <Route path={'/question/:id'} exact>
+            <QuestionForm />
+          </Route>
+          <Route path={'/question/details/:id'} exact>
+            <QuestionDetails />
           </Route>
           <Route path="*">
             <NotFound />
