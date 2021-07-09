@@ -5,6 +5,7 @@ import classes from "./CreateQuestion.module.css";
 import { saveQuestion } from "../../store/questionSlice";
 import { useHistory } from "react-router";
 import { uiActions } from "../../store/uiSlice";
+import { fetchUsers } from "../../store/usersSlice";
 
 const CreateQuestion = () => {
   const dispatch = useDispatch();
@@ -16,18 +17,24 @@ const CreateQuestion = () => {
 
   const submitQuestionHandler = (e) => {
     e.preventDefault();
-    setIsSubmiting(true)
+    setIsSubmiting(true);
     dispatch(
       saveQuestion({
         author: currentUser.id,
         optionOneText: optionOne,
         optionTwoText: optionTwo,
       })
-    ).then(() => {
-      setIsSubmiting(false)
-      dispatch(uiActions.changeActiveNavTab('home'))
-      history.push("/home");
-    });
+    )
+      .then(() => {
+        dispatch(fetchUsers());
+      })
+      .then(() => {
+        setTimeout(() => {
+          setIsSubmiting(false);
+          dispatch(uiActions.changeActiveNavTab("home"));
+          history.push("/home");
+        }, 200);
+      });
   };
   return (
     <div className={classes.card}>
@@ -61,9 +68,7 @@ const CreateQuestion = () => {
             </div>
             <button disabled={optionOne === "" && optionTwo === ""}>
               Submit
-              {isSubmiting && (
-                <div className={classes.loadingIcon}></div>
-              )}
+              {isSubmiting && <div className={classes.loadingIcon}></div>}
             </button>
           </form>
         </div>

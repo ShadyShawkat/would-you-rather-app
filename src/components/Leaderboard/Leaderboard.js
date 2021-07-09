@@ -1,11 +1,11 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
 import classes from "./Leaderboard.module.css";
 
 let initial = true;
 const Leaderboard = () => {
-    const dispatch = useDispatch();
+
   const users = Object.values(useSelector((state) => state.users.users));
   let [usersToShow, setUsersToShow] = useState([]);
 

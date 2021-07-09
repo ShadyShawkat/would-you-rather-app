@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 import classes from "./QuestionForm.module.css";
 import { answerQuestion } from "../../store/questionSlice";
+import { fetchUsers } from "../../store/usersSlice";
 
 const QuestionForm = () => {
   const history = useHistory();
@@ -36,10 +37,17 @@ const QuestionForm = () => {
         qid: question.id,
         answer: formValue,
       })
-    ).then(() => {
-      setIsSubmiting(false);
-      history.push(`/question/details/${questionId}`);
-    });
+    )
+      .then(() => {
+        dispatch(fetchUsers());
+        console.log("fetchUsers");
+      })
+      .then(() => {
+        setTimeout(() => {
+          setIsSubmiting(false);
+          history.push(`/question/details/${questionId}`);
+        }, 300);
+      });
   };
 
   const setFormValueHandler = (event) => {
@@ -93,9 +101,7 @@ const QuestionForm = () => {
                 </div>
                 <button onClick={submitAnswerHandler}>
                   Submit
-                  {isSubmiting && (
-                    <div className={classes.loadingIcon}></div>
-                  )}
+                  {isSubmiting && <div className={classes.loadingIcon}></div>}
                 </button>
               </form>
             </div>

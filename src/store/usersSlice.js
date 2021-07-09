@@ -17,7 +17,7 @@ const usersSlice = createSlice({
 
 export const fetchUsers = () => {
   return async (dispatch) => {
-    _getUsers().then((data) => dispatch(usersSlice.actions.getUsers(data)));
+    return _getUsers().then((data) => dispatch(usersSlice.actions.getUsers(data)));
   };
 };
 
