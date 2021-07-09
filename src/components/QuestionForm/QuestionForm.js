@@ -1,17 +1,23 @@
-import classes from "./QuestionForm.module.css";
-import { useParams } from "react-router";
-import { useSelector } from "react-redux";
+import { useParams, useHistory } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 
+import classes from "./QuestionForm.module.css";
+import { answerQuestion } from "../../store/questionSlice";
+
 const QuestionForm = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const { id: questionId } = useParams();
+
   const allQuestions = Object.values(
     useSelector((state) => state.questions.questions)
   );
   const currentUser = useSelector((state) => state.auth.currentUser);
+
   const users = Object.values(useSelector((state) => state.users.users));
 
-  const [formValue, setFormValue] = useState('optionOne');
+  const [formValue, setFormValue] = useState("optionOne");
   const [dataLoaded, setDataLoaded] = useState(false);
 
   const question = {};
@@ -21,14 +27,21 @@ const QuestionForm = () => {
   );
   question.author = users.find((user) => user.id === question.author);
 
-  const submitAnswerHandler = (event) => {
-      event.preventDefault();
-      console.log(formValue)
+  const submitAnswerHandler = () => {
+    dispatch(
+      answerQuestion({
+        authedUser: currentUser.id,
+        qid: question.id,
+        answer: formValue,
+      })
+    ).then(() => {
+      history.push(`./details/${questionId}`);
+    });
   };
 
   const setFormValueHandler = (event) => {
-      setFormValue(event.target.value)
-  }
+    setFormValue(event.target.value);
+  };
 
   useEffect(() => {
     if (users.length > 0 && allQuestions.length > 0) {
@@ -52,17 +65,17 @@ const QuestionForm = () => {
             </div>
             <div className={classes.cardText}>
               <h4>Would You Rather</h4>
-              <form onSubmit={submitAnswerHandler}>
+              <form onSubmit={(e) => e.preventDefault()}>
                 <div>
                   <input
                     type="radio"
                     id="optionOne"
                     name="options"
                     value="optionOne"
-                    checked={formValue === 'optionOne'}
+                    checked={formValue === "optionOne"}
                     onChange={setFormValueHandler}
                   />
-                  <label for="optionOne">{question.optionOne.text}</label>
+                  <label htmlFor="optionOne">{question.optionOne.text}</label>
                 </div>
                 <div>
                   <input
@@ -70,12 +83,12 @@ const QuestionForm = () => {
                     id="optionTwo"
                     name="options"
                     value="optionTwo"
-                    checked={formValue === 'optionTwo'}
+                    checked={formValue === "optionTwo"}
                     onChange={setFormValueHandler}
                   />
-                  <label for="optionTwo">{question.optionTwo.text}</label>
+                  <label htmlFor="optionTwo">{question.optionTwo.text}</label>
                 </div>
-                <button>Submit</button>
+                <button onClick={submitAnswerHandler}>Submit</button>
               </form>
             </div>
           </div>

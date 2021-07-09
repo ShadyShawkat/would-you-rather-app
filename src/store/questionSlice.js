@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { _getQuestions } from "../_DATA";
+import { _getQuestions, _saveQuestion, _saveQuestionAnswer } from "../_DATA";
 
 const initialState = {
   questions: {},
@@ -20,6 +20,14 @@ export const fetchQuestions = () => {
     _getQuestions().then((data) =>
       dispatch(questionSlice.actions.getQuestion(data))
     );
+  };
+};
+
+export const answerQuestion = (question) => {
+  return async (dispatch) => {
+    return _saveQuestionAnswer(question)
+      .then(() => _getQuestions())
+      .then((data) => dispatch(questionSlice.actions.getQuestion(data)));
   };
 };
 

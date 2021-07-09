@@ -28,6 +28,8 @@ const QuestionDetails = () => {
     }
   }, [allQuestions, users]);
 
+  console.log(allQuestions)
+
   return (
     <div>
       {!dataLoaded && (
@@ -75,8 +77,7 @@ const QuestionDetails = () => {
               </div>
               <div
                 className={
-                  (classes.optionTwo,
-                  question.optionTwo.votes.includes(currentUser.id) &&
+                  (question.optionTwo.votes.includes(currentUser.id) &&
                     classes.voted)
                 }
               >

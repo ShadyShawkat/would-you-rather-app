@@ -3,7 +3,7 @@
     border-radius: 0.75rem;
     overflow: hidden;
     margin-bottom: 1.5rem;
-    width: 40%;
+    width: 35%;
     margin: 1.5rem auto;
   
   }
@@ -13,22 +13,13 @@
     padding: 0.5rem;
     font-weight: bold;
     background-color: rgb(235, 235, 235);
+    text-align: center;
+    font-size: 1.5rem;
   }
   
   .cardBody {
     display: flex;
     padding: 0.75rem;
-  }
-  
-  .avatarImg {
-    width: 40%;
-    margin: auto 0.5rem auto 0;
-    border-right: 1px solid rgb(148, 148, 148);
-    padding-right: 0.5rem;;
-  }
-  
-  .avatarImg img {
-    width: 100%;
   }
   
   .cardText {
@@ -41,6 +32,9 @@
   .cardText h4 {
     margin: 0;
     padding: 0;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
   }
   
   .cardText form {
@@ -48,24 +42,44 @@
     flex-direction: column;
     flex:1;
     justify-content: space-evenly;
+    margin-top: 1.5rem;
   }
   
   .cardText form > div {
-      margin-top: 1.5rem
+      margin-top: 1rem;
+  }
+  
+  .cardText form .orDiv {
+      text-align: center;
+      font-weight: bold;
+  }
+
+  .cardText input {
+      width: 100%;
+      height: 2rem;
+      border: 1px solid rgb(148, 148, 148);
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 0.5rem;
+  }
+
+  .cardText input::placeholder {
+      font-weight: bold;
   }
 
   .cardText button {
-      background-color: rgb(218, 5, 147);
-      color: white;
-      font-weight: bold;
-      font-size: 1rem;
-      border: 1px solid rgb(148, 148, 148);
-      border-radius: 0.65rem;
-      cursor: pointer;
-      margin-top: auto;
-      padding: 0.5rem;
-  }
-
+    background-color: rgb(218, 5, 147);
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    border: 1px solid rgb(148, 148, 148);
+    border-radius: 0.65rem;
+    cursor: pointer;
+    margin-top: auto;
+    padding: 0.5rem;
+    margin-top: 1rem;
+}
+/* 
   .loadingRing {
     display: inline-block;
     width: 80px;
@@ -92,5 +106,5 @@
     100% {
       transform: rotate(360deg);
     }
-  }
+  } */
   

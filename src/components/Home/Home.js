@@ -1,15 +1,12 @@
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import classes from "./Home.module.css";
 import Question from "../Question/Question";
-import { fetchUsers } from "../../store/usersSlice";
-import { fetchQuestions } from "../../store/questionSlice";
 
 let inital = true;
 const Home = () => {
-  // const dispatch = useDispatch();
   const history = useHistory();
   const [activeTab, SetActiveTab] = useState("unanswered");
   const [questionsToShow, setQuestionsToShow] = useState([]);
@@ -39,24 +36,9 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    if (users.length > 0 && allQuestions.length > 0 && inital) {
-      inital = false;
-      setDataLoaded(true);
-      getQuestionsForSelectedTab();
-    }
-  }, [users, allQuestions]);
-
-  useEffect(() => {
-    inital = true;
-    getQuestionsForSelectedTab();
-  }, [activeTab]);
-
   const getQuestionsForSelectedTab = () => {
     const answeredQuestion = [];
     const unansweredQuestion = [];
-
-    console.log(currentUser);
 
     allQuestionsWithUsersInfo.map((question) => {
       if (
@@ -76,6 +58,19 @@ const Home = () => {
     }
   };
 
+
+  useEffect(() => {
+    if (users.length > 0 && allQuestions.length > 0 && inital) {
+      inital = false;
+      setDataLoaded(true);
+      getQuestionsForSelectedTab();
+    }
+  }, [users, allQuestions, getQuestionsForSelectedTab]);
+
+  useEffect(() => {
+    inital = true;
+    getQuestionsForSelectedTab();
+  }, [activeTab]);
   return (
     <div className={classes.main}>
       <div className={classes.header}>

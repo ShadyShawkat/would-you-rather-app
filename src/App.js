@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Route, Switch, Redirect, Router } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import Nav from "./components/Navigation/Nav";
 import Login from "./components/Login/Login";
 import NotFound from "./components/NotFound/NotFound";
 import Home from "./components/Home/Home";
-import Question from './components/Question/Question'
-import QuestionDetails from "./components/QuestionDetails/QuestionDetails"
-import QuestionForm from './components/QuestionForm/QuestionForm'
+import QuestionDetails from "./components/QuestionDetails/QuestionDetails";
+import QuestionForm from "./components/QuestionForm/QuestionForm";
+import CreateQuestion from "./components/CreateQuestion/CreateQuestion";
 import { fetchUsers } from "./store/usersSlice";
 import { fetchQuestions } from "./store/questionSlice";
-import { authActions } from "./store/authSlice"
+import { authActions } from "./store/authSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ function App() {
   useEffect(() => {
     dispatch(fetchUsers());
     dispatch(fetchQuestions());
-  }, []);
+  })
 
   return (
     <React.Fragment>
@@ -36,10 +36,13 @@ function App() {
           <Route path={["/", "/home"]} exact>
             <Home />
           </Route>
-          <Route path={'/question/:id'} exact>
+          <Route path="/question/create" exact>
+            <CreateQuestion />
+          </Route>
+          <Route path="/question/:id" exact>
             <QuestionForm />
           </Route>
-          <Route path={'/question/details/:id'} exact>
+          <Route path="/question/details/:id" exact>
             <QuestionDetails />
           </Route>
           <Route path="*">
@@ -49,16 +52,11 @@ function App() {
       ) : (
         <Redirect to="/login" />
       )}
-      {/* <Route path={["/", "/login", "/home"]} exact> */}
       {!currentUser && (
         <Route path="/login" exact>
           <Login />
         </Route>
       )}
-
-      {/* <Route path="*">
-        <NotFound />
-      </Route> */}
     </React.Fragment>
   );
 }
