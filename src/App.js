@@ -9,6 +9,7 @@ import Home from "./components/Home/Home";
 import QuestionDetails from "./components/QuestionDetails/QuestionDetails";
 import QuestionForm from "./components/QuestionForm/QuestionForm";
 import CreateQuestion from "./components/CreateQuestion/CreateQuestion";
+import Leaderboard from "./components/Leaderboard/Leaderboard";
 import { fetchUsers } from "./store/usersSlice";
 import { fetchQuestions } from "./store/questionSlice";
 import { authActions } from "./store/authSlice";
@@ -44,6 +45,9 @@ function App() {
           </Route>
           <Route path="/question/details/:id" exact>
             <QuestionDetails />
+          </Route>
+          <Route path="/leaderboard">
+            <Leaderboard />
           </Route>
           <Route path="*">
             <NotFound />

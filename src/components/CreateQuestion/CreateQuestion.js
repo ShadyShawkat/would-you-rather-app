@@ -1,45 +1,75 @@
-import classes from './CreateQuestion.module.css';
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import classes from "./CreateQuestion.module.css";
+import { saveQuestion } from "../../store/questionSlice";
+import { useHistory } from "react-router";
+import { uiActions } from "../../store/uiSlice";
 
 const CreateQuestion = () => {
-    const setFormValueHandler = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [optionOne, setOptionOne] = useState("");
+  const [optionTwo, setOptionTwo] = useState("");
+  const currentUser = useSelector((state) => state.auth.currentUser);
+  const [isSubmiting, setIsSubmiting] = useState(false);
 
-    }
-
-    const submitAnswerHandler = () => {
-
-    }
-    return (
-        <div className={classes.card}>
-          <div className={classes.cardHeader}>Create New Question</div>
-          <div className={classes.cardBody}>
-            <div className={classes.cardText}>
-              <h4>Would You Rather</h4>
-              <form onSubmit={(e) => e.preventDefault()}>
-                <div>
-                  <input
-                    type="text"
-                    id="optionOne"
-                    name="options"
-                    onChange={setFormValueHandler}
-                    placeholder="Option One"
-                  />
-                </div>
-                <div className={classes.orDiv}>OR</div>
-                <div>
-                  <input
-                    type="text"
-                    id="optionTwo"
-                    name="options"
-                    onChange={setFormValueHandler}
-                    placeholder="Option Two"
-                  />
-                </div>
-                <button onClick={submitAnswerHandler}>Submit</button>
-              </form>
+  const submitQuestionHandler = (e) => {
+    e.preventDefault();
+    setIsSubmiting(true)
+    dispatch(
+      saveQuestion({
+        author: currentUser.id,
+        optionOneText: optionOne,
+        optionTwoText: optionTwo,
+      })
+    ).then(() => {
+      setIsSubmiting(false)
+      dispatch(uiActions.changeActiveNavTab('home'))
+      history.push("/home");
+    });
+  };
+  return (
+    <div className={classes.card}>
+      <div className={classes.cardHeader}>Create New Question</div>
+      <div className={classes.cardBody}>
+        <div className={classes.cardText}>
+          <h4>Would You Rather</h4>
+          <form onSubmit={submitQuestionHandler}>
+            <div>
+              <input
+                type="text"
+                value={optionOne}
+                onChange={(event) => {
+                  setOptionOne(event.target.value);
+                }}
+                placeholder="Option One"
+                required
+              />
             </div>
-          </div>
+            <div className={classes.orDiv}>OR</div>
+            <div>
+              <input
+                type="text"
+                value={optionTwo}
+                onChange={(event) => {
+                  setOptionTwo(event.target.value);
+                }}
+                placeholder="Option Two"
+                required
+              />
+            </div>
+            <button disabled={optionOne === "" && optionTwo === ""}>
+              Submit
+              {isSubmiting && (
+                <div className={classes.loadingIcon}></div>
+              )}
+            </button>
+          </form>
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
-export default CreateQuestion
+export default CreateQuestion;

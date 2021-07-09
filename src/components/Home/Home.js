@@ -19,7 +19,7 @@ const Home = () => {
   const allQuestions = Object.values(
     useSelector((state) => state.questions.questions)
   );
-  allQuestions.sort((q1, q2) => q1.timestamp - q2.timestamp);
+  allQuestions.sort((q1, q2) => q2.timestamp - q1.timestamp);
 
   const allQuestionsWithUsersInfo = allQuestions.map((q) => {
     const question = {};

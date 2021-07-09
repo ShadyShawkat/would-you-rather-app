@@ -9,6 +9,7 @@ const QuestionForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { id: questionId } = useParams();
+  const [isSubmiting, setIsSubmiting] = useState(false);
 
   const allQuestions = Object.values(
     useSelector((state) => state.questions.questions)
@@ -28,6 +29,7 @@ const QuestionForm = () => {
   question.author = users.find((user) => user.id === question.author);
 
   const submitAnswerHandler = () => {
+    setIsSubmiting(true);
     dispatch(
       answerQuestion({
         authedUser: currentUser.id,
@@ -35,7 +37,8 @@ const QuestionForm = () => {
         answer: formValue,
       })
     ).then(() => {
-      history.push(`./details/${questionId}`);
+      setIsSubmiting(false);
+      history.push(`/question/details/${questionId}`);
     });
   };
 
@@ -88,7 +91,12 @@ const QuestionForm = () => {
                   />
                   <label htmlFor="optionTwo">{question.optionTwo.text}</label>
                 </div>
-                <button onClick={submitAnswerHandler}>Submit</button>
+                <button onClick={submitAnswerHandler}>
+                  Submit
+                  {isSubmiting && (
+                    <div className={classes.loadingIcon}></div>
+                  )}
+                </button>
               </form>
             </div>
           </div>

@@ -1,0 +1,103 @@
+.main {
+  margin: 1rem auto;
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgb(148, 148, 148);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.header {
+  width: 100%;
+  background-color: rgb(206, 206, 206);
+  padding: 1rem;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.cards {
+  width: 90%;
+  margin: 1.5rem 1rem;
+}
+
+.card {
+  border: 1px solid rgb(148, 148, 148);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.avatarImg {
+  width: 30%;
+  border-right: 1px solid rgb(207, 207, 207);
+  padding: 0.5rem;
+}
+
+.avatarImg img {
+  width: 100%;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+  justify-content: space-evenly;
+  border-right: 1px solid rgb(207, 207, 207);
+  flex: 1;
+}
+
+.cardBody div {
+  display: flex;
+  align-items: center;
+}
+
+.cardBody div div {
+  align-items: center;
+  margin-bottom: 0 !important;
+  margin-left: auto;
+}
+
+.cardBody :first-child {
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.cardBody :nth-child(2) {
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgb(207, 207, 207);
+}
+
+.cardScore {
+  margin-left: auto;
+  border: 1px solid rgb(207, 207, 207);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.75rem;
+  margin: auto 0.5rem;
+}
+
+.cardScore :first-child {
+  background-color: rgb(194, 194, 194);
+  padding: 1rem;
+}
+
+.cardScore :nth-child(2) {
+  background-color: rgb(115, 252, 103);
+  margin: 0.5rem 1rem;
+  padding: 1rem 0;
+  border-radius: 50%;
+}
+
+.cardScore div {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}

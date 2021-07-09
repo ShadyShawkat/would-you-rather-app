@@ -31,5 +31,13 @@ export const answerQuestion = (question) => {
   };
 };
 
+export const saveQuestion = (question) => {
+  return async (dispatch) => {
+    return _saveQuestion(question)
+      .then(() => _getQuestions())
+      .then((data) => dispatch(questionSlice.actions.getQuestion(data)));
+  };
+};
+
 export const questionActions = questionSlice.actions;
 export default questionSlice.reducer;
