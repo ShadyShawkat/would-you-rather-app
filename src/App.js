@@ -16,9 +16,8 @@ import { authActions } from "./store/authSlice";
 
 function App() {
   const dispatch = useDispatch();
-  const currentUser =
-    useSelector((state) => state.auth.currentUser) ||
-    JSON.parse(localStorage.getItem("currentUser"));
+  const currentUser = useSelector((state) => state.auth.currentUser) 
+    // || JSON.parse(localStorage.getItem("currentUser"));
 
   if (currentUser) {
     dispatch(authActions.login(currentUser));
@@ -28,6 +27,13 @@ function App() {
     dispatch(fetchUsers());
     dispatch(fetchQuestions());
   })
+
+  if (window.performance) {
+    if (performance.navigation.type !== 1 && !currentUser) {
+      const href = window.location.href.split('/').splice(3).map(u => `/${u}`).join('')
+      localStorage.setItem('goTo', href)
+    }
+  }
 
   return (
     <React.Fragment>
@@ -49,12 +55,12 @@ function App() {
           <Route path="/leaderboard">
             <Leaderboard />
           </Route>
-          <Route path="*">
+          <Route path={["/notfound", "*"]}>
             <NotFound />
           </Route>
         </Switch>
       ) : (
-        <Redirect to="/login" />
+        <Redirect to="/login"/>
       )}
       {!currentUser && (
         <Route path="/login" exact>

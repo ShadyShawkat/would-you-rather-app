@@ -27,6 +27,7 @@ const QuestionForm = () => {
     question,
     allQuestions.find((question) => question.id === questionId)
   );
+
   question.author = users.find((user) => user.id === question.author);
 
   const submitAnswerHandler = () => {
@@ -57,6 +58,9 @@ const QuestionForm = () => {
   useEffect(() => {
     if (users.length > 0 && allQuestions.length > 0) {
       setDataLoaded(true);
+      if(!Object.values(allQuestions).find(q => q.id === question.id)) {
+        history.push('/notFound')
+      }
     }
   }, [allQuestions, users]);
 

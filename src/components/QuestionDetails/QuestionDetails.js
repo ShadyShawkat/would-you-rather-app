@@ -1,10 +1,11 @@
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
 import classes from "./QuestionDetails.module.css";
 
 const QuestionDetails = () => {
+  const history = useHistory();
   const { id: questionId } = useParams();
   const allQuestions = Object.values(
     useSelector((state) => state.questions.questions)
@@ -25,6 +26,9 @@ const QuestionDetails = () => {
   useEffect(() => {
     if (users.length > 0 && allQuestions.length > 0) {
       setDataLoaded(true);
+      if(!Object.values(allQuestions).find(q => q.id === question.id)) {
+        history.push('/notFound')
+      }
     }
   }, [allQuestions, users]);
 

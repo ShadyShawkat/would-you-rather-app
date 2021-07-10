@@ -13,6 +13,7 @@ const Login = (props) => {
   const users = useSelector((state) => state.users.users);
   const [isSelectOptionLoaded, setIsSelectOptionLoaded] = useState(false);
   const [selectedOption, setSelectedOption] = useState("default");
+  const goTo = localStorage.getItem('goTo') ||  null
 
   const changeSelectionHandler = (event) => {
     setSelectedOption(event.target.value);
@@ -26,7 +27,11 @@ const Login = (props) => {
 
   const loginHandler = () => {
     dispatch(authActions.login(Object.values(users).find(user => user.id === selectedOption)))
-    history.push('/home')
+    if(!goTo || goTo === '/login') {
+      history.push('/home')
+    } else {
+      history.push(goTo)
+    }
   }
 
   useEffect(() => {
